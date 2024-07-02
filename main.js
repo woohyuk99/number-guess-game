@@ -19,6 +19,7 @@ let resultArea = document.getElementById("result-area");
 let resetButton = document.getElementById('reset-button')
 let chances = 3
 let gameOver = false
+let answerArea = document.getElementById("answer-area")
 let chanceArea = document.getElementById('chance-area')
 let history = []
 
@@ -28,6 +29,7 @@ userInput.addEventListener('focus', function () {userInput.value = ''})
 
 function pickRandomNum() {
   computerNum = Math.floor(Math.random() * 100) + 1;
+  answerArea.textContent = `${computerNum}`;
   console.log('정답', computerNum);
 }
 
@@ -72,11 +74,14 @@ function play() {
 function reset() {
     // user input창이 깨끗하게 정리
     userInput.value = ''
-    // 새로운 번호 생성
+    resultArea.textContent = '게임 새로 시작'
+    playButton.disabled = false
+    gameOver = false
+    history = []
+    chances = 3
+    chanceArea.textContent = `남은 기회: ${chances}번`
+    resultArea.textContent = ''
     pickRandomNum()
-
-    resultArea.textContent = '결과값이 여기 나옵니다!'
-    // 
 }
 
 pickRandomNum();
